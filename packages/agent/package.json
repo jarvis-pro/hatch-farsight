@@ -21,11 +21,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@rrweb/record": "^2.1.0"
+    "@rrweb/record": "catalog:"
   },
   "devDependencies": {
     "@farsight/protocol": "workspace:*",
-    "tsup": "^8.3.5",
-    "typescript": "~5.7.2"
+    "tsup": "catalog:",
+    "typescript": "catalog:"
   }
 }
