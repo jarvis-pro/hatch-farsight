@@ -1,7 +1,6 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
@@ -36,20 +35,23 @@ export default tseslint.config(
     },
   },
 
-  // viewer —— React 19（浏览器环境 + hooks 规则 + fast-refresh 约束）
+  // viewer —— React 19。只启用经典的高价值 hooks 规则。
+  //
+  // 刻意**不**采用 react-hooks v7 的 `recommended-latest`：它捆绑的是 React Compiler
+  // 规则集（purity / immutability / refs / set-state-in-effect / incompatible-library 等），
+  // 面向「代码将被 React Compiler 编译」的前提做静态约束。本项目用 @vitejs/plugin-react-swc、
+  // 未启用 Compiler，那些规则会把大量正确写法（实时倒计时里的 Date.now、同步 open/外部 store
+  // 的 setState、tanstack 虚拟化库的返回值等）误报为问题。
+  //
+  // react-refresh/only-export-components 也不启用：它只是 dev 阶段 fast-refresh 的边界提示，
+  // 而 viewer 构建为单文件、且多处按 shadcn 约定让组件与工具/常量同文件——非缺陷。
   {
     files: ['packages/viewer/**/*.{ts,tsx}'],
     languageOptions: { globals: { ...globals.browser } },
-    plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
+    plugins: { 'react-hooks': reactHooks },
     rules: {
-      ...reactHooks.configs['recommended-latest'].rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      // react-hooks v7 新增的 React-Compiler 风格规则较激进，既有代码里多为合理写法：
-      // 先降为 warn 作为改进提示，不阻断构建/CI；后续可逐条收紧为 error。
-      'react-hooks/set-state-in-effect': 'warn',
-      'react-hooks/purity': 'warn',
-      'react-hooks/immutability': 'warn',
-      'react-hooks/refs': 'warn',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
 
