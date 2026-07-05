@@ -1,0 +1,7 @@
+# 构建产物 / 依赖 / 锁文件
+**/dist/
+node_modules/
+pnpm-lock.yaml
+
+# CLI 内嵌的 viewer 单文件构建产物（有意提交，非手写）
+packages/cli/viewer.html
