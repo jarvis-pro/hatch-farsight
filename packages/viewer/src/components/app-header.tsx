@@ -56,7 +56,7 @@ function ThemeMenu({ theme, onSetTheme }: { theme: Theme; onSetTheme: (t: Theme)
             >
               <I className="size-4 text-muted-foreground" />
               <span className="flex-1 text-left">{THEME_LABEL[t]}</span>
-              {theme === t && <Check className="size-3.5 text-[var(--primary)]" />}
+              {theme === t && <Check className="size-3.5 text-primary" />}
             </button>
           );
         })}
@@ -90,10 +90,8 @@ function AgentPicker({ relay }: { relay: Relay }) {
   const codeTag = (id: string, on?: boolean) => (
     <span
       className={cn(
-        'shrink-0 rounded px-1 font-[family-name:var(--rd-mono)] text-[10px] tracking-wide',
-        on
-          ? 'bg-[var(--primary)]/15 text-[var(--primary)]'
-          : 'bg-muted-foreground/15 text-muted-foreground',
+        'shrink-0 rounded px-1 font-(family-name:--rd-mono) text-[10px] tracking-wide',
+        on ? 'bg-(--primary)/15 text-primary' : 'bg-muted-foreground/15 text-muted-foreground',
       )}
     >
       {id}
@@ -136,10 +134,7 @@ function AgentPicker({ relay }: { relay: Relay }) {
               className="flex w-full items-start gap-2 rounded px-2 py-1.5 text-left hover:bg-accent"
             >
               <Check
-                className={cn(
-                  'mt-0.5 size-3.5 shrink-0',
-                  sel ? 'text-[var(--primary)]' : 'opacity-0',
-                )}
+                className={cn('mt-0.5 size-3.5 shrink-0', sel ? 'text-primary' : 'opacity-0')}
               />
               {codeTag(a.id, sel)}
               <span className="min-w-0 flex-1">
@@ -230,7 +225,7 @@ function ConnectionStatus({ relay }: { relay: Relay }) {
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && relay.connect(draft)}
               spellCheck={false}
-              className="h-8 flex-1 font-[family-name:var(--rd-mono)] text-xs"
+              className="h-8 flex-1 font-(family-name:--rd-mono) text-xs"
               aria-label="中继地址"
             />
             {live ? (

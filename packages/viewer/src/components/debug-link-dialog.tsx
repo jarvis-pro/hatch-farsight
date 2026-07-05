@@ -148,7 +148,7 @@ export function DebugLinkDialog({
               onChange={(e) => onPage(e.target.value)}
               spellCheck={false}
               placeholder="https://落地页域名/iOSHome.html"
-              className="h-9 font-[family-name:var(--rd-mono)] text-xs"
+              className="h-9 font-(family-name:--rd-mono) text-xs"
             />
           </label>
 
@@ -169,7 +169,7 @@ export function DebugLinkDialog({
               spellCheck={false}
               placeholder="如 happy-cat-1234（自动补 .trycloudflare.com）"
               title={locked ? '隧道地址由本机中继自动提供，不可更改' : undefined}
-              className="h-9 font-[family-name:var(--rd-mono)] text-xs"
+              className="h-9 font-(family-name:--rd-mono) text-xs"
             />
           </label>
         </div>
@@ -197,7 +197,7 @@ export function DebugLinkDialog({
                   href={link}
                   target="_blank"
                   rel="noreferrer"
-                  className="min-w-0 flex-1 break-all font-[family-name:var(--rd-mono)] text-xs text-[var(--primary)] hover:underline"
+                  className="min-w-0 flex-1 break-all font-(family-name:--rd-mono) text-xs text-primary hover:underline"
                 >
                   {link}
                 </a>

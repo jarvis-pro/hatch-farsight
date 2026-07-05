@@ -186,7 +186,7 @@ function BoxModel({ styles }: { styles: Record<string, string> }) {
   const w = lenVal(styles, 'width');
   const h = lenVal(styles, 'height');
   return (
-    <div className="font-[family-name:var(--rd-mono)] text-foreground">
+    <div className="font-(family-name:--rd-mono) text-foreground">
       <Ring label="margin" v={margin} cls="bg-amber-400/15">
         <Ring label="border" v={border} cls="bg-violet-400/15">
           <Ring label="padding" v={padding} cls="bg-emerald-400/15">
@@ -299,7 +299,7 @@ function TreeRow({
         onMouseEnter={() => onHover(id)}
         onMouseLeave={() => onHover(null)}
         className={cn(
-          'flex cursor-default items-center gap-1 rounded-sm py-0.5 pr-1.5 font-[family-name:var(--rd-mono)] text-xs',
+          'flex cursor-default items-center gap-1 rounded-sm py-0.5 pr-1.5 font-(family-name:--rd-mono) text-xs',
           isSelf ? 'bg-secondary text-secondary-foreground' : 'hover:bg-accent',
         )}
         style={{ paddingLeft: depth * 12 + 4 }}
@@ -391,7 +391,7 @@ function NodePath({
       <div
         ref={ref}
         onScroll={update}
-        className="no-scrollbar flex min-w-0 items-center gap-0.5 overflow-x-auto font-[family-name:var(--rd-mono)] text-xs whitespace-nowrap"
+        className="no-scrollbar flex min-w-0 items-center gap-0.5 overflow-x-auto font-(family-name:--rd-mono) text-xs whitespace-nowrap"
       >
         {crumbs.map((a) => (
           <span key={a.id} className="flex shrink-0 items-center">
@@ -571,7 +571,7 @@ export function DomInspector({
             {/* 盒模型 + 其它计算样式：均居中、无子标题;空间足够时并排,不够则换行各自居中。 */}
             <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-4">
               <BoxModel styles={detail.styles} />
-              <div className="grid grid-cols-[minmax(5rem,auto)_auto] gap-x-3 gap-y-1 font-[family-name:var(--rd-mono)] text-xs">
+              <div className="grid grid-cols-[minmax(5rem,auto)_auto] gap-x-3 gap-y-1 font-(family-name:--rd-mono) text-xs">
                 {Object.entries(detail.rest).map(([k, v]) => (
                   <div key={k} className="contents">
                     <span className="break-all text-muted-foreground">{k}</span>
@@ -591,7 +591,7 @@ export function DomInspector({
         className="group relative z-20 h-px shrink-0 cursor-row-resize bg-border"
       >
         <span className="absolute inset-x-0 -top-1 -bottom-1" />
-        <span className="pointer-events-none absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-[var(--primary)] opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
+        <span className="pointer-events-none absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 rounded-full bg-primary opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
       </div>
 
       {/* 下：实时结构树（从 html 根渗透,懒展开）——去掉标题,整块空间交给节点树。 */}

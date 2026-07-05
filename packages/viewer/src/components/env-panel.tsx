@@ -198,11 +198,11 @@ function SectionCard({
         />
       </header>
       {shown.length === 0 ? (
-        <div className="px-3 py-2 font-[family-name:var(--rd-mono)] text-xs text-muted-foreground/50">
+        <div className="px-3 py-2 font-(family-name:--rd-mono) text-xs text-muted-foreground/50">
           （空）
         </div>
       ) : (
-        <div className="grid grid-cols-[minmax(5rem,auto)_1fr] gap-x-3 gap-y-1 px-3 py-2 font-[family-name:var(--rd-mono)] text-xs">
+        <div className="grid grid-cols-[minmax(5rem,auto)_1fr] gap-x-3 gap-y-1 px-3 py-2 font-(family-name:--rd-mono) text-xs">
           {shown.map((row) => (
             <div key={row.flatKey} className="contents">
               <span className="break-all text-muted-foreground" title={row.k}>

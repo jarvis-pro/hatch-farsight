@@ -65,7 +65,7 @@ const Row = memo(function Row({ e, q }: { e: ConsoleEntry; q: string }) {
           </span>
         );
       case 'eval-in':
-        return <span className="text-[var(--primary)]">⟶ {highlight(e.code, q)}</span>;
+        return <span className="text-primary">⟶ {highlight(e.code, q)}</span>;
       case 'eval-out': {
         const tree = e.ok ? tryParseStructured(e.value) : null;
         if (tree !== null)
@@ -83,10 +83,10 @@ const Row = memo(function Row({ e, q }: { e: ConsoleEntry; q: string }) {
         );
       }
       case 'sys':
-        return <span className="text-[var(--primary)]">· {highlight(e.message, q)}</span>;
+        return <span className="text-primary">· {highlight(e.message, q)}</span>;
       case 'hello':
         return (
-          <span className="text-[var(--primary)]">
+          <span className="text-primary">
             ▶ agent 上线：{e.ua}
             <span className="mt-0.5 block text-muted-foreground">{e.url}</span>
           </span>
@@ -95,7 +95,7 @@ const Row = memo(function Row({ e, q }: { e: ConsoleEntry; q: string }) {
   })();
 
   return (
-    <div className="group flex gap-2 border-b border-border/40 px-3 py-1 font-[family-name:var(--rd-mono)] text-xs leading-relaxed whitespace-pre-wrap break-words">
+    <div className="group flex gap-2 border-b border-border/40 px-3 py-1 font-(family-name:--rd-mono) text-xs leading-relaxed whitespace-pre-wrap wrap-break-word">
       <span className="shrink-0 text-muted-foreground/70 tabular-nums">{e.time}</span>
       <span className="min-w-0 flex-1">{body}</span>
       <CopyButton

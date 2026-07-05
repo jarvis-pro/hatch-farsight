@@ -41,7 +41,7 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
   if (!isObj) {
     return (
       <div
-        className="flex gap-1.5 pl-[var(--indent)]"
+        className="flex gap-1.5 pl-(--indent)"
         style={{ ['--indent' as string]: `${depth * 12}px` }}
       >
         {keyLabel}
@@ -61,7 +61,7 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
     <div style={{ ['--indent' as string]: `${depth * 12}px` }}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center gap-1.5 pl-[var(--indent)] text-left hover:bg-accent/30"
+        className="flex w-full items-center gap-1.5 pl-(--indent) text-left hover:bg-accent/30"
       >
         <span className="w-3 shrink-0 text-muted-foreground/60">{open ? '▾' : '▸'}</span>
         {keyLabel}
@@ -78,7 +78,7 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
             <Node key={ek} k={ek} value={ev} depth={depth + 1} />
           ))}
           <div
-            className="pl-[var(--indent)] text-muted-foreground/60"
+            className="pl-(--indent) text-muted-foreground/60"
             style={{ ['--indent' as string]: `${depth * 12}px` }}
           >
             {brace[1]}
@@ -92,7 +92,7 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
 /** 渲染一棵 JSON 树。`value` 是已解析的对象/数组。 */
 export function JsonTree({ value, className }: { value: unknown; className?: string }): ReactNode {
   return (
-    <div className={cn('font-[family-name:var(--rd-mono)] text-xs leading-relaxed', className)}>
+    <div className={cn('font-(family-name:--rd-mono) text-xs leading-relaxed', className)}>
       <Node k={null} value={value} depth={0} />
     </div>
   );

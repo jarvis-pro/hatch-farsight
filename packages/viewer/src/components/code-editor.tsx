@@ -32,14 +32,14 @@ export function CodeEditor({
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded border border-input bg-muted/30 font-[family-name:var(--rd-mono)] text-xs leading-relaxed',
+        'relative overflow-hidden rounded border border-input bg-muted/30 font-(family-name:--rd-mono) text-xs leading-relaxed',
         className,
       )}
     >
       <pre
         ref={preRef}
         aria-hidden
-        className="rd-scroll pointer-events-none absolute inset-0 m-0 overflow-auto p-3 font-[family-name:var(--rd-mono)] break-words whitespace-pre-wrap text-foreground"
+        className="rd-scroll pointer-events-none absolute inset-0 m-0 overflow-auto p-3 font-(family-name:--rd-mono) wrap-break-word whitespace-pre-wrap text-foreground"
       >
         {highlightJs(value)}
         {'\n'}
@@ -53,7 +53,7 @@ export function CodeEditor({
         autoFocus={autoFocus}
         placeholder={placeholder}
         spellCheck={false}
-        className="rd-scroll absolute inset-0 resize-none overflow-auto bg-transparent p-3 font-[family-name:var(--rd-mono)] break-words whitespace-pre-wrap text-transparent caret-foreground outline-none placeholder:text-muted-foreground"
+        className="rd-scroll absolute inset-0 resize-none overflow-auto bg-transparent p-3 font-(family-name:--rd-mono) wrap-break-word whitespace-pre-wrap text-transparent caret-foreground outline-none placeholder:text-muted-foreground"
       />
     </div>
   );

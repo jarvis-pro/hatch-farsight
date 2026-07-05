@@ -25,7 +25,7 @@ function kindColor(kind: string) {
 function EventRow({ e, q }: { e: EventEntry; q: string }) {
   const color = kindColor(e.kind);
   return (
-    <div className="group flex items-center gap-2 border-b border-border/40 px-3 py-1 font-[family-name:var(--rd-mono)] text-xs">
+    <div className="group flex items-center gap-2 border-b border-border/40 px-3 py-1 font-(family-name:--rd-mono) text-xs">
       <span className="shrink-0 text-muted-foreground/70 tabular-nums">{e.time}</span>
       {/* 类别列：定宽对齐，点 + 文字同色，过长 kind 截断（完整见 title）。 */}
       <span className={cn('flex w-28 shrink-0 items-center gap-1.5', color.text)} title={e.kind}>

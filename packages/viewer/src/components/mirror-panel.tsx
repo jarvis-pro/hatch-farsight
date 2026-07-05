@@ -500,7 +500,7 @@ export function MirrorPanel({ relay }: { relay: Relay }) {
         <button
           onClick={start}
           disabled={!online}
-          className="flex items-center gap-1 rounded bg-[var(--primary)] px-2 py-1 text-[11px] font-medium text-white disabled:opacity-50"
+          className="flex items-center gap-1 rounded bg-primary px-2 py-1 text-[11px] font-medium text-white disabled:opacity-50"
         >
           <MonitorPlay className="size-3.5" /> 开始
         </button>
@@ -582,12 +582,12 @@ export function MirrorPanel({ relay }: { relay: Relay }) {
           />
           <div
             ref={hoverLabelRef}
-            className="pointer-events-none absolute top-0 left-0 z-20 hidden rounded bg-sky-500 px-1 py-px font-[family-name:var(--rd-mono)] text-[10px] whitespace-nowrap text-white"
+            className="pointer-events-none absolute top-0 left-0 z-20 hidden rounded bg-sky-500 px-1 py-px font-(family-name:--rd-mono) text-[10px] whitespace-nowrap text-white"
           />
           {/* 自绘光标：跟踪录制端鼠标（tip 在 0,0,经 translate 定位）。 */}
           <div
             ref={cursorRef}
-            className="pointer-events-none absolute top-0 left-0 z-20 opacity-0 transition-[transform] duration-[32ms] ease-linear"
+            className="pointer-events-none absolute top-0 left-0 z-20 opacity-0 transition-[transform] duration-32 ease-linear"
             style={{ willChange: 'transform' }}
           >
             <svg width="15" height="22" viewBox="0 0 15 22" aria-hidden>
@@ -644,7 +644,7 @@ export function MirrorPanel({ relay }: { relay: Relay }) {
         {active && (
           <>
             <span className="absolute inset-y-0 -left-1 -right-1" />
-            <span className="pointer-events-none absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 rounded-full bg-[var(--primary)] opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
+            <span className="pointer-events-none absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 rounded-full bg-primary opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100" />
           </>
         )}
       </div>

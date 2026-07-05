@@ -51,7 +51,7 @@ function NetRow({ e, open, onToggle }: { e: NetEntry; open: boolean; onToggle: (
   const bad = isBadNet(e);
   const { path, name } = splitUrl(e.url);
   return (
-    <div className="border-b border-border/40 font-[family-name:var(--rd-mono)] text-xs">
+    <div className="border-b border-border/40 font-(family-name:--rd-mono) text-xs">
       <button
         onClick={onToggle}
         className="flex w-full items-center gap-2.5 px-3 py-1.5 text-left hover:bg-accent/40"
@@ -99,7 +99,9 @@ function Field({ label, value, pre }: { label: string; value: string; pre?: bool
         {label}
         <CopyButton value={value} />
       </div>
-      <div className={cn('break-words text-foreground', pre && 'whitespace-pre-wrap')}>{value}</div>
+      <div className={cn('wrap-break-word text-foreground', pre && 'whitespace-pre-wrap')}>
+        {value}
+      </div>
     </div>
   );
 }
