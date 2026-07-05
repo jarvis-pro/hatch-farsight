@@ -1,0 +1,23 @@
+{
+  "name": "@farsight/cli",
+  "version": "0.1.0",
+  "description": "Farsight 中继 CLI —— 本地零依赖 WS relay + 内嵌 viewer 单文件 + 自动 Cloudflare 隧道（npm 上 farsight 名称已被占用，故包名走 scope；bin 命令仍是 farsight）",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "farsight": "./bin.mjs"
+  },
+  "files": [
+    "bin.mjs",
+    "viewer.html"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "cp ../viewer/dist/index.html ./viewer.html"
+  },
+  "devDependencies": {
+    "@farsight/viewer": "workspace:*"
+  }
+}

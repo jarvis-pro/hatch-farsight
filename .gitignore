@@ -1,0 +1,12 @@
+# deps / build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# 注意：packages/cli/viewer.html 是**有意提交**的构建产物——
+# 让 `npx github:<org>/hatch-farsight` 与 fresh clone 无需构建即可跑 relay。
+
+# misc
+.DS_Store
+*.log
+.turbo/

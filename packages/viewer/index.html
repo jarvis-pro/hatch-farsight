@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Farsight · Viewer</title>
+    <!-- 首屏前套用主题偏好，避免浅/深闪烁（与 theme-toggle.tsx 的 KEY/逻辑一致）。
+         DevTools 默认深色：无偏好时直接上 .dark。 -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('farsight-theme') || 'dark';
+          var dark =
+            t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './ui/tokens.css';
+
+/* 类名扫描：viewer 自身与内联 ui 组件都在 src 下，一条 source 即可（Tailwind v4）。 */
+@source './**/*.{ts,tsx}';
+
+/* 暗色由 <html>.dark 切换（非 prefers-color-scheme），dark: 工具类跟随手动开关。仅本 dev 工具。 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* viewer 主题色（仅本 dev 工具）：与 DevHub 一致的蓝，区别于生产租户换肤。 */
+:root {
+  --primary: #0062ff;
+}
+
+/* 暗色 token：DevTools 主用深色，覆盖 ui/tokens.css 的默认中性基调。 */
+.dark {
+  --background: #0a0a0b;
+  --foreground: #e4e4e7;
+  --card: #131316;
+  --card-foreground: #e4e4e7;
+  --popover: #131316;
+  --popover-foreground: #e4e4e7;
+  --primary-foreground: #fafafa;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #1c1c1f;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #f87171;
+  --border: #ffffff1f;
+  --input: #ffffff24;
+}
+
+/* 等宽字体变量：日志/网络/代码区统一用它（终端观感） */
+:root {
+  --rd-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  overflow: hidden; /* 整页不滚动；滚动交给各面板内部容器 */
+}
+
+/* 隐藏 rrweb 回放自带光标（渲染在回放 iframe 外层、与 iframe 平级）：双缓冲重建会让它冻结/跳位,
+   镜像改用自绘光标覆盖层跟踪鼠标,故这里把 rrweb 的隐藏。 */
+.replayer-mouse,
+.replayer-mouse-tail {
+  display: none !important;
+}
+
+/* 隐藏滚动条（用于面包屑等靠箭头/滚轮横滚的窄条） */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 细滚动条（深色终端观感） */
+.rd-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--muted-foreground) 40%, transparent) transparent;
+}
+.rd-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.rd-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
