@@ -36,12 +36,14 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
   const isObj = value !== null && typeof value === 'object';
   const [open, setOpen] = useState(depth < 1);
 
-  const keyLabel =
-    k === null ? null : <span className="text-muted-foreground">{k}</span>;
+  const keyLabel = k === null ? null : <span className="text-muted-foreground">{k}</span>;
 
   if (!isObj) {
     return (
-      <div className="flex gap-1.5 pl-[var(--indent)]" style={{ ['--indent' as string]: `${depth * 12}px` }}>
+      <div
+        className="flex gap-1.5 pl-[var(--indent)]"
+        style={{ ['--indent' as string]: `${depth * 12}px` }}
+      >
         {keyLabel}
         {keyLabel && <span className="text-muted-foreground/50">:</span>}
         <Leaf value={value} />
@@ -75,7 +77,10 @@ function Node({ k, value, depth }: { k: string | null; value: unknown; depth: nu
           {entries.map(([ek, ev]) => (
             <Node key={ek} k={ek} value={ev} depth={depth + 1} />
           ))}
-          <div className="pl-[var(--indent)] text-muted-foreground/60" style={{ ['--indent' as string]: `${depth * 12}px` }}>
+          <div
+            className="pl-[var(--indent)] text-muted-foreground/60"
+            style={{ ['--indent' as string]: `${depth * 12}px` }}
+          >
             {brace[1]}
           </div>
         </div>

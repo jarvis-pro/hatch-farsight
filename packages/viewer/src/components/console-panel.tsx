@@ -59,7 +59,9 @@ const Row = memo(function Row({ e, q }: { e: ConsoleEntry; q: string }) {
         return (
           <span className="text-rose-400">
             ✖ {highlight(e.message, q)}
-            {e.stack && <span className="mt-0.5 block text-rose-400/70">{highlight(e.stack, q)}</span>}
+            {e.stack && (
+              <span className="mt-0.5 block text-rose-400/70">{highlight(e.stack, q)}</span>
+            )}
           </span>
         );
       case 'eval-in':
@@ -119,7 +121,8 @@ export function ConsolePanel() {
   const toggleLevel = (lv: Level | 'system') =>
     setActive((prev) => {
       const next = new Set(prev);
-      next.has(lv) ? next.delete(lv) : next.add(lv);
+      if (next.has(lv)) next.delete(lv);
+      else next.add(lv);
       return next;
     });
   const allOn = active.size === ALL.length;

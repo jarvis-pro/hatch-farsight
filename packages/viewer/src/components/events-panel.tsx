@@ -28,10 +28,7 @@ function EventRow({ e, q }: { e: EventEntry; q: string }) {
     <div className="group flex items-center gap-2 border-b border-border/40 px-3 py-1 font-[family-name:var(--rd-mono)] text-xs">
       <span className="shrink-0 text-muted-foreground/70 tabular-nums">{e.time}</span>
       {/* 类别列：定宽对齐，点 + 文字同色，过长 kind 截断（完整见 title）。 */}
-      <span
-        className={cn('flex w-28 shrink-0 items-center gap-1.5', color.text)}
-        title={e.kind}
-      >
+      <span className={cn('flex w-28 shrink-0 items-center gap-1.5', color.text)} title={e.kind}>
         <span className={cn('size-1.5 shrink-0 rounded-full', color.dot)} />
         <span className="truncate font-medium">{e.kind}</span>
       </span>
@@ -77,7 +74,8 @@ export function EventsPanel() {
   const toggle = (kind: string) =>
     setDisabled((prev) => {
       const next = new Set(prev);
-      next.has(kind) ? next.delete(kind) : next.add(kind);
+      if (next.has(kind)) next.delete(kind);
+      else next.add(kind);
       return next;
     });
 
@@ -102,7 +100,11 @@ export function EventsPanel() {
             allLabel="全部类型"
             allOn={kindsAllOn}
             onAll={() => setDisabled(new Set())}
-            options={kinds.map((k) => ({ value: k, count: kindCounts[k] ?? 0, className: kindColor(k).text }))}
+            options={kinds.map((k) => ({
+              value: k,
+              count: kindCounts[k] ?? 0,
+              className: kindColor(k).text,
+            }))}
             isOn={(k) => !disabled.has(k)}
             onToggle={toggle}
           />

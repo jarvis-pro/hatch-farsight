@@ -309,8 +309,7 @@ export function MirrorPanel({ relay }: { relay: Relay }) {
           r as unknown as { getMirror?: () => { getNode: (id: number) => Node | null } }
         ).getMirror?.();
         const node = mirror?.getNode(data.id) as
-          | (Element & { scrollTo?: typeof window.scrollTo })
-          | null;
+          (Element & { scrollTo?: typeof window.scrollTo }) | null;
         if (!node) return;
         const doc = r.iframe.contentDocument;
         const x = data.x ?? 0;

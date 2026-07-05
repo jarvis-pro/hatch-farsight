@@ -10,12 +10,12 @@
 
 **源实现位置**（`prod-landing-web`，本地路径 `/Users/hash/Documents/Work/Github/prod-landing-web`）：
 
-| 模块 | 源路径 | 目标包 |
-|---|---|---|
-| agent | `packages/app-shell/src/remote-debug.ts` | `@farsight/agent` |
-| viewer | `tools/remote-debug/src/` | `@farsight/viewer` |
-| protocol | `packages/remote-debug-protocol/` | `@farsight/protocol` |
-| relay | `tools/remote-debug/relay.mjs` | `farsight` (CLI) |
+| 模块     | 源路径                                   | 目标包               |
+| -------- | ---------------------------------------- | -------------------- |
+| agent    | `packages/app-shell/src/remote-debug.ts` | `@farsight/agent`    |
+| viewer   | `tools/remote-debug/src/`                | `@farsight/viewer`   |
+| protocol | `packages/remote-debug-protocol/`        | `@farsight/protocol` |
+| relay    | `tools/remote-debug/relay.mjs`           | `farsight` (CLI)     |
 
 ---
 
@@ -50,10 +50,10 @@
 
 替代「clone 整个仓库」的两条路径，职责清晰、代码永不过期：
 
-| 角色 | 用法 | 说明 |
-|---|---|---|
-| **联调工程师** | `npx farsight` | 起本地 relay + 单文件 viewer + 自动 Cloudflare 隧道，打印 `?debug=` 链接。零 clone、零安装、永远最新，跑完不留垃圾。也可 `npx github:<org>/hatch-farsight`，连 npm 都不发就跑。 |
-| **被联调的项目** | `pnpm add @farsight/agent` | `?debug=` 触发时懒加载、独立 chunk，正常用户不下载。 |
+| 角色             | 用法                       | 说明                                                                                                                                                                            |
+| ---------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **联调工程师**   | `npx farsight`             | 起本地 relay + 单文件 viewer + 自动 Cloudflare 隧道，打印 `?debug=` 链接。零 clone、零安装、永远最新，跑完不留垃圾。也可 `npx github:<org>/hatch-farsight`，连 npm 都不发就跑。 |
+| **被联调的项目** | `pnpm add @farsight/agent` | `?debug=` 触发时懒加载、独立 chunk，正常用户不下载。                                                                                                                            |
 
 ---
 
@@ -95,8 +95,8 @@ hatch-farsight/
 现 agent（`prod-landing-web` 的 `remote-debug.ts:12-13`）硬编码依赖本项目模块：
 
 ```ts
-import { getErrorMessage } from '@landing/errors';   // 业务错误码映射
-import { resolveTenant } from '@landing/tenant';      // 租户/主题解析
+import { getErrorMessage } from '@landing/errors'; // 业务错误码映射
+import { resolveTenant } from '@landing/tenant'; // 租户/主题解析
 ```
 
 > 现导出的函数名为 `startRemoteDebug`，独立后重命名为 `startFarsight`。
@@ -134,7 +134,7 @@ import { resolveTenant } from '@landing/tenant';
 startFarsight(token, {
   decodeBusinessCode: (code) => (code === 0 ? '成功' : getErrorMessage(code)),
   buildSnapshot: () => {
-    const { appKey, signKey, ...safe } = resolveTenant();  // 剥离密钥
+    const { appKey, signKey, ...safe } = resolveTenant(); // 剥离密钥
     return { tenant: safe };
   },
 });
@@ -195,5 +195,5 @@ viewer 现依赖 `@landing/ui` + `@landing/errors`（协议已经由 `@landing/r
 
 ## 附：命名决策
 
-**Farsight** — slogan *Debug where they are.*
+**Farsight** — slogan _Debug where they are._
 一语双关（远程 + 用户真实环境）。清晰压倒聪明，团队秒懂；Logo 走望远镜 / 同心圆雷达意象。

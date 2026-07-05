@@ -128,7 +128,9 @@ export function EvalDialog({
           className="h-48"
         />
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-muted-foreground">⌘/Ctrl+↵ 运行 · ↑ 调历史 · 结果回 Console</span>
+          <span className="text-[10px] text-muted-foreground">
+            ⌘/Ctrl+↵ 运行 · ↑ 调历史 · 结果回 Console
+          </span>
           <Button size="sm" disabled={!online || !code.trim()} onClick={run}>
             <Play className="size-4" /> 运行
           </Button>

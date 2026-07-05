@@ -144,13 +144,15 @@ export function NetworkPanel() {
   const toggle = (id: number) =>
     setOpen((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   const toggleMethod = (m: string) =>
     setHiddenMethods((prev) => {
       const next = new Set(prev);
-      next.has(m) ? next.delete(m) : next.add(m);
+      if (next.has(m)) next.delete(m);
+      else next.add(m);
       return next;
     });
 

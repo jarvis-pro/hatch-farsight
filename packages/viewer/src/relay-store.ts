@@ -7,12 +7,7 @@
  * 环形缓冲**（{@link CAP}），防长时间联调内存无限涨。
  */
 import { useSyncExternalStore } from 'react';
-import type {
-  AgentInfo,
-  IncomingMessage,
-  NetMessage,
-  SnapshotMessage,
-} from '@farsight/protocol';
+import type { AgentInfo, IncomingMessage, NetMessage, SnapshotMessage } from '@farsight/protocol';
 
 /** 各通道保留的最大条数（超出丢弃最旧的）。 */
 export const CAP = 5000;
@@ -155,7 +150,7 @@ const isWatchedOnline = (s: State): boolean =>
  * （收到 meta 即清空重来），供镜像面板**挂载时**播种 Replayer；之后的实时帧经 {@link mirrorListeners}
  * 直接喂给 Replayer.addEvent,不触发 React 重渲染。可变数组、不复制,降低高频流的 GC 压力。
  */
-let mirrorBuffer: RrwebEvent[] = [];
+const mirrorBuffer: RrwebEvent[] = [];
 const MIRROR_CAP = 2000;
 const mirrorListeners = new Set<(ev: RrwebEvent) => void>();
 /** pong 回声订阅（延迟探针）：与镜像帧一样走轻量 pub/sub,不进带持久化的 store 切片。 */

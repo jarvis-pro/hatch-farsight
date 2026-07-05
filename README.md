@@ -57,7 +57,7 @@ import { startFarsight } from '@farsight/agent';
 startFarsight(token, {
   // 后端响应 JSON {code,message} 时，把「HTTP 200 但 code≠0」映射成可读错误名标红；
   // 不传则只显示 HTTP status。code===0 也会经过本函数（自行返回如「成功」）。
-  decodeBusinessCode: (code) => (code === 0 ? '成功' : myErrorTable[code] ?? `码 ${code}`),
+  decodeBusinessCode: (code) => (code === 0 ? '成功' : (myErrorTable[code] ?? `码 ${code}`)),
   // 环境快照的业务补充（如解析后的租户/主题）；密钥必须自行剥离后再返回。
   buildSnapshot: () => ({ tenant: safeTenantInfo() }),
 });

@@ -554,7 +554,7 @@ function dumpStorage(s: Storage): Record<string, string> {
  */
 function buildSnapshot(): Record<string, unknown> {
   /** 业务补充（宿主自行剥离密钥）；抛错不影响通用快照，错误进 `snapshotError`。 */
-  let extra: Record<string, unknown> = {};
+  let extra: Record<string, unknown>;
   try {
     extra = options.buildSnapshot?.() ?? {};
   } catch (e) {

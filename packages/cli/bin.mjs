@@ -227,7 +227,7 @@ function handleAgentMessage(conn, text) {
  * @param {Conn} conn @param {string} text
  */
 function handleViewerMessage(conn, text) {
-  let cmd = null;
+  let cmd;
   try {
     cmd = JSON.parse(text);
   } catch {

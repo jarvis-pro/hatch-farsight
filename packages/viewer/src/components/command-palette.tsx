@@ -42,7 +42,9 @@ export function CommandPalette({
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
     if (!needle) return commands;
-    return commands.filter((c) => `${c.label} ${c.hint ?? ''} ${c.keywords ?? ''}`.toLowerCase().includes(needle));
+    return commands.filter((c) =>
+      `${c.label} ${c.hint ?? ''} ${c.keywords ?? ''}`.toLowerCase().includes(needle),
+    );
   }, [commands, q]);
 
   // 打开时重置；过滤变化时把选中收敛到首个可用项
@@ -124,7 +126,9 @@ export function CommandPalette({
               >
                 {c.icon && <c.icon className="size-4 shrink-0 text-muted-foreground" />}
                 <span className="min-w-0 flex-1 truncate">{c.label}</span>
-                {c.hint && <span className="shrink-0 text-[10px] text-muted-foreground">{c.hint}</span>}
+                {c.hint && (
+                  <span className="shrink-0 text-[10px] text-muted-foreground">{c.hint}</span>
+                )}
               </button>
             ))
           )}

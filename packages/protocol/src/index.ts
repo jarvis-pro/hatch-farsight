@@ -163,11 +163,7 @@ export interface TunnelMessage {
 
 /** viewer 实际会收到的全部消息 = agent 消息 + relay 注入的 sys / agents / reset / tunnel。 */
 export type IncomingMessage =
-  | AgentMessage
-  | SysMessage
-  | AgentsMessage
-  | ResetMessage
-  | TunnelMessage;
+  AgentMessage | SysMessage | AgentsMessage | ResetMessage | TunnelMessage;
 
 /** 任意消息的判别标签（`msg.t`）。 */
 export type IncomingKind = IncomingMessage['t'];
