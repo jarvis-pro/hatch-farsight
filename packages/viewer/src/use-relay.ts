@@ -7,7 +7,7 @@
  * socket”的迟到 onclose 会误触发重连，连环关掉好连接，形成每隔几秒断连重连的死循环。
  */
 import { useCallback, useEffect, useRef } from 'react';
-import type { IncomingMessage, ViewerCommand } from '@farsight/protocol';
+import type { IncomingMessage, ViewerCommand } from '@farview/protocol';
 import { store } from './relay-store';
 
 /** 自动重连间隔（ms）。 */

@@ -1,14 +1,14 @@
 /**
- * Farsight agent（按需懒加载，独立 chunk）。
+ * Farview agent（按需懒加载，独立 chunk）。
  *
  * 仅当 URL 带 `?debug=<隧道子域名>` 时由宿主 bootstrap 动态 import，平时不进首屏、
  * 正常用户永不下载。劫持 console / fetch / XHR / 全局报错，反连到你本地经 Cloudflare
- * 隧道暴露的中继（见 @farsight/cli 的 bin.mjs），你在 viewer 里实时看其控制台。
+ * 隧道暴露的中继（见 @farview/cli 的 bin.mjs），你在 viewer 里实时看其控制台。
  *
  * 安全：本模块**不读取任何密钥**，只转发日志；eval 仅作用于加载它的那个用户自己的
  * 页面。门禁 = 隧道随机地址不可猜 + 中继只在联调期间存活。
  *
- * 零业务依赖：业务码解码 / 环境快照的业务补充均由宿主经 {@link FarsightOptions} 注入，
+ * 零业务依赖：业务码解码 / 环境快照的业务补充均由宿主经 {@link FarviewOptions} 注入，
  * agent 本体不 import 任何具体项目的模块。
  *
  * 模块划分（本文件仅编排；各职责见对应文件）：
@@ -33,19 +33,19 @@ import {
 import { ensureCode } from './identity';
 import { state } from './state';
 import { connect } from './transport';
-import type { FarsightOptions } from './types';
+import type { FarviewOptions } from './types';
 
-export type { FarsightOptions } from './types';
+export type { FarviewOptions } from './types';
 
 const TUNNEL_SUFFIX = '.trycloudflare.com';
 
 /**
- * 启动 Farsight agent。
+ * 启动 Farview agent。
  * @param token URL `?debug=` 的值：Cloudflare 隧道子域名（如 `able-modern-foo-bar`，
  *   自动补 `.trycloudflare.com`），或含点的完整主机名（如命名隧道 / 自定义域名）则原样使用。
- * @param opts 宿主项目的可选业务适配注入（见 {@link FarsightOptions}）；不传全走通用路径。
+ * @param opts 宿主项目的可选业务适配注入（见 {@link FarviewOptions}）；不传全走通用路径。
  */
-export function startFarsight(token: string, opts?: FarsightOptions): void {
+export function startFarview(token: string, opts?: FarviewOptions): void {
   if (state.installed || !token) return;
   state.installed = true;
   state.options = opts ?? {};
@@ -62,6 +62,6 @@ export function startFarsight(token: string, opts?: FarsightOptions): void {
     connect(host);
   } catch (err) {
     // agent 任何异常都不得影响宿主页面，但要留一条警告，别让联调静默失灵。
-    warn('[farsight] agent 启动失败，已停用（不影响页面）：', err);
+    warn('[farview] agent 启动失败，已停用（不影响页面）：', err);
   }
 }

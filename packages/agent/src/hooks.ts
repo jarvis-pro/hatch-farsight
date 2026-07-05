@@ -8,7 +8,7 @@ import { emit, state } from './state';
 
 /**
  * ② 从响应原文里抽出业务码并映射可读错误名。
- * 后端响应是 JSON `{code,message}` 时解析 code 并调宿主注入的 {@link FarsightOptions.decodeBusinessCode}，
+ * 后端响应是 JSON `{code,message}` 时解析 code 并调宿主注入的 {@link FarviewOptions.decodeBusinessCode}，
  * 把「200 但 code=xxxx」这类业务失败一眼标出。须在截断前对原文解析。
  * 宿主未注入解码器 → 跳过业务码解码（viewer 只显示 HTTP status）。
  */

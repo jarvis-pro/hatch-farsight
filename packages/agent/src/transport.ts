@@ -2,7 +2,7 @@
 // 经 Cloudflare 隧道 WebSocket 反连本地中继，接收 viewer 下发的命令（eval / snapshot / mirror / ping），
 // 断开自动退避重连（除非用户已主动退出）。
 
-import type { ViewerCommand } from '@farsight/protocol';
+import type { ViewerCommand } from '@farview/protocol';
 import { clip, fmt } from './format';
 import { ensureCode } from './identity';
 import { startMirror, stopMirror } from './mirror';

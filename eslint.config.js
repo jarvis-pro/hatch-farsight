@@ -5,7 +5,7 @@ import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
 /**
- * Farsight ESLint 扁平配置（flat config）。
+ * Farview ESLint 扁平配置（flat config）。
  *
  * - 只做「代码正确性」检查，格式一律交给 Prettier —— 末尾的 `prettier` 关掉所有会与
  *   Prettier 冲突的样式类规则，两者互不打架。

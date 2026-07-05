@@ -7,18 +7,18 @@
  * emit 只依赖 `state.ws`，是各 hook / 镜像 / 命令处理向 viewer 发消息的共同出口，故与状态同处一室。
  */
 
-import type { AgentMessage } from '@farsight/protocol';
-import type { FarsightOptions } from './types';
+import type { AgentMessage } from '@farview/protocol';
+import type { FarviewOptions } from './types';
 
 interface AgentState {
-  /** 当前 WebSocket（null = 未连 / 已断）。线协议由 @farsight/protocol 单一维护，viewer 共用同一份。 */
+  /** 当前 WebSocket（null = 未连 / 已断）。线协议由 @farview/protocol 单一维护，viewer 共用同一份。 */
   ws: WebSocket | null;
   /** 已连续退避重连次数。 */
   retries: number;
-  /** startFarsight 是否已执行（防重复安装）。 */
+  /** startFarview 是否已执行（防重复安装）。 */
   installed: boolean;
-  /** 宿主注入的业务适配（startFarsight 时赋值；缺省全走通用路径）。 */
-  options: FarsightOptions;
+  /** 宿主注入的业务适配（startFarview 时赋值；缺省全走通用路径）。 */
+  options: FarviewOptions;
   /** 本页签身份码：同一浏览器多标签下 UA/URL 全同，靠它在 viewer 里区分谁是谁。 */
   agentCode: string;
   /** 用户已主动退出联调：一旦置位，断开后不再自动重连、emit 全静默。 */

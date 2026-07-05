@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark' | 'system';
 
-const KEY = 'farsight-theme';
+const KEY = 'farview-theme';
 const mql = () => window.matchMedia('(prefers-color-scheme: dark)');
 
 function isDark(theme: Theme) {

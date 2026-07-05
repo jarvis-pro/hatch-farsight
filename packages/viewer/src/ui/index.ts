@@ -1,5 +1,5 @@
 /**
- * viewer 内联 UI（最小 shadcn 风格组件集，Farsight 自持）。
+ * viewer 内联 UI（最小 shadcn 风格组件集，Farview 自持）。
  * 从原 @landing/ui 摘取 viewer 实际用到的组件；弹层 portal 直接挂 body
  * （原包的 portal-container 是宿主 MobileFrame 专用，此处不需要）。
  */

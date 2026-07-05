@@ -1,4 +1,4 @@
-# Farsight
+# Farview
 
 > **Debug where they are.**
 
@@ -20,7 +20,7 @@
 ### 联调工程师侧：起中继
 
 ```bash
-npx @farsight/cli        # 发布到 npm 后
+npx @farview/cli        # 发布到 npm 后
 # 仓库内（未发布前）：
 pnpm start               # 或 node packages/cli/bin.mjs
 ```
@@ -32,29 +32,29 @@ pnpm start               # 或 node packages/cli/bin.mjs
 2. 给用户发链接：`https://<用户页面域名>/?debug=<子域名>`；
 3. 用户打开后，viewer 顶部下拉出现该页签（4 位身份码），选中即实时收看。
 
-环境开关：`PORT=9300` 换端口；`FARSIGHT_NO_TUNNEL=1` 跳过自动隧道（自行
+环境开关：`PORT=9300` 换端口；`FARVIEW_NO_TUNNEL=1` 跳过自动隧道（自行
 `cloudflared tunnel --url http://localhost:9229`）。
 
 ### 被联调的项目侧：接入 agent
 
 ```bash
-pnpm add @farsight/agent
+pnpm add @farview/agent
 ```
 
 ```ts
 // 仅当 URL 带 ?debug= 时懒加载（独立 chunk，正常用户永不下载、不含密钥）
 const debugToken = new URLSearchParams(location.search).get('debug');
 if (debugToken) {
-  void import('@farsight/agent').then((m) => m.startFarsight(debugToken));
+  void import('@farview/agent').then((m) => m.startFarview(debugToken));
 }
 ```
 
 **业务适配（可选注入，agent 本体零业务依赖）**：
 
 ```ts
-import { startFarsight } from '@farsight/agent';
+import { startFarview } from '@farview/agent';
 
-startFarsight(token, {
+startFarview(token, {
   // 后端响应 JSON {code,message} 时，把「HTTP 200 但 code≠0」映射成可读错误名标红；
   // 不传则只显示 HTTP status。code===0 也会经过本函数（自行返回如「成功」）。
   decodeBusinessCode: (code) => (code === 0 ? '成功' : (myErrorTable[code] ?? `码 ${code}`)),
@@ -92,10 +92,10 @@ startFarsight(token, {
 
 ```
 packages/
-  protocol/   @farsight/protocol —— 线协议单一真相源（纯类型、零运行时）
-  agent/      @farsight/agent    —— 可发布 agent，零业务依赖（业务靠 FarsightOptions 注入）
-  viewer/     @farsight/viewer   —— React 迷你 DevTools，构建为单个自包含 HTML（不单独发布）
-  cli/        @farsight/cli      —— relay + 内嵌 viewer 单文件 + 自动隧道；bin 命令 `farsight`
+  protocol/   @farview/protocol —— 线协议单一真相源（纯类型、零运行时）
+  agent/      @farview/agent    —— 可发布 agent，零业务依赖（业务靠 FarviewOptions 注入）
+  viewer/     @farview/viewer   —— React 迷你 DevTools，构建为单个自包含 HTML（不单独发布）
+  cli/        @farview/cli      —— relay + 内嵌 viewer 单文件 + 自动隧道；bin 命令 `farview`
 docs/
   migration-plan.md   从 prod-landing-web 独立出来的迁移方案与架构决策
   viewer-design.md    viewer 的交互/架构设计
@@ -109,12 +109,12 @@ pnpm dev:viewer              # 迭代 viewer 本身：HMR，连本地 relay
 ```
 
 > `packages/cli/viewer.html` 是**有意提交**的构建产物：让
-> `npx github:<org>/hatch-farsight` 与 fresh clone 免构建即可跑。改动 viewer 后
+> `npx github:<org>/hatch-farview` 与 fresh clone 免构建即可跑。改动 viewer 后
 > 记得 `pnpm build` 刷新它。
 
 ## 发布（待办）
 
-- npm 上 `farsight` 包名已被占用 → CLI 走 scope：`@farsight/cli`（bin 命令仍是 `farsight`）。
-- 需在 npmjs.com 建 org `farsight`（公开包免费）后：`pnpm -r publish --access public`。
-- 发布 `@farsight/protocol`、`@farsight/agent`、`@farsight/cli`；viewer 不发布（已内嵌）。
-- 发布后把消费方的 `file:` 依赖换成版本号（如 prod-landing-web 的 `@farsight/agent`）。
+- 全部包发布于自有 scope `@farview`：`@farview/cli`（bin 命令 `farview`）等；org 已创建。
+- 直接 `pnpm -r publish --access public`。
+- 发布 `@farview/protocol`、`@farview/agent`、`@farview/cli`；viewer 不发布（已内嵌）。
+- 发布后把消费方的 `file:` 依赖换成版本号（如 prod-landing-web 的 `@farview/agent`）。

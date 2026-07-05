@@ -1,8 +1,8 @@
 {
-  "name": "@farsight/viewer",
+  "name": "@farview/viewer",
   "version": "0.1.0",
   "private": true,
-  "description": "Farsight viewer —— React 迷你 DevTools，构建为单个自包含 HTML，由 CLI 内嵌伺服",
+  "description": "Farview viewer —— React 迷你 DevTools，构建为单个自包含 HTML，由 CLI 内嵌伺服",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@farsight/protocol": "workspace:*",
+    "@farview/protocol": "workspace:*",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-popover": "catalog:",
     "@radix-ui/react-select": "catalog:",

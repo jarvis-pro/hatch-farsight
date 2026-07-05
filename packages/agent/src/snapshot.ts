@@ -40,7 +40,7 @@ function dumpStorage(s: Storage): Record<string, string> {
 }
 
 /**
- * ① 构建环境快照 = 业务补充（宿主经 {@link FarsightOptions.buildSnapshot} 注入，如租户/主题）
+ * ① 构建环境快照 = 业务补充（宿主经 {@link FarviewOptions.buildSnapshot} 注入，如租户/主题）
  * + 通用部分（CSS 变量 + URL + 设备 + storage）。宿主未注入 → 只有通用部分。
  */
 export function buildSnapshot(): Record<string, unknown> {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // @ts-check
 /**
- * Farsight 中继（dev-only，绝不进生产）。
+ * Farview 中继（dev-only，绝不进生产）。
  *
  * 不设房间码：同一隧道下**多个 agent**（多设备/多标签的宿主页面）与**多个 viewer**
  * （你本地的迷你 DevTools）共存。门禁 = 隧道随机公网地址本身不可猜 + 进程只在联调
@@ -14,9 +14,9 @@
  * 会形成抢占战，viewer 镜像在多份 DOM 间反复重建而抽搐）。
  *
  * 用法：
- *   npx @farsight/cli                    # 默认 :9229，并自动起 Cloudflare 隧道
- *   PORT=9300 npx @farsight/cli
- *   FARSIGHT_NO_TUNNEL=1 npx @farsight/cli   # 跳过自动隧道，自行 cloudflared
+ *   npx @farview/cli                    # 默认 :9229，并自动起 Cloudflare 隧道
+ *   PORT=9300 npx @farview/cli
+ *   FARVIEW_NO_TUNNEL=1 npx @farview/cli   # 跳过自动隧道，自行 cloudflared
  *   （仓库内开发：node packages/cli/bin.mjs 或 pnpm start）
  *
  * 中继启动后会**自动**拉起 `cloudflared tunnel --url http://localhost:PORT`（quick tunnel，
@@ -122,7 +122,7 @@ const server = http.createServer((req, res) => {
   }
   // 其余（含隧道侧）：健康检查；真正的连接走 WS upgrade。
   res.writeHead(200, { 'content-type': 'text/plain' });
-  res.end('farsight relay up. connect via WebSocket (?role=agent|viewer).\n');
+  res.end('farview relay up. connect via WebSocket (?role=agent|viewer).\n');
 });
 
 server.on('upgrade', (req, socket) => {
@@ -251,7 +251,7 @@ function handleViewerMessage(conn, text) {
 
 server.listen(PORT, () => {
   console.log();
-  log(green('●'), bold('Farsight 中继已启动'), dim('→'), cyan(`http://localhost:${PORT}`));
+  log(green('●'), bold('Farview 中继已启动'), dim('→'), cyan(`http://localhost:${PORT}`));
   log(dim('  viewer（本地迷你 DevTools）：'), cyan(`http://localhost:${PORT}/`));
   startTunnel();
 });
@@ -265,12 +265,12 @@ let shuttingDown = false;
 /**
  * 自动起 Cloudflare quick tunnel（TryCloudflare），把本地中继暴露成随机公网子域名。
  * 解析其输出里的 `https://<子域名>.trycloudflare.com` 并醒目打印——直接拷给用户拼 `?debug=`。
- * 未装 cloudflared / 想自行起隧道：设 `FARSIGHT_NO_TUNNEL=1` 跳过（中继照常运行）。
+ * 未装 cloudflared / 想自行起隧道：设 `FARVIEW_NO_TUNNEL=1` 跳过（中继照常运行）。
  */
 function startTunnel() {
-  if (process.env.FARSIGHT_NO_TUNNEL) {
+  if (process.env.FARVIEW_NO_TUNNEL) {
     log(
-      dim('已设 FARSIGHT_NO_TUNNEL：跳过自动隧道。自行执行：'),
+      dim('已设 FARVIEW_NO_TUNNEL：跳过自动隧道。自行执行：'),
       cyan(`cloudflared tunnel --url http://localhost:${PORT}`),
     );
     return;
@@ -288,7 +288,7 @@ function startTunnel() {
     tunnel = null;
     if (err.code === 'ENOENT') {
       log(red('✗ 未找到 cloudflared。'), '安装：', cyan('brew install cloudflared'));
-      log(dim('  或设 FARSIGHT_NO_TUNNEL=1 自行起隧道。中继仍在运行。'));
+      log(dim('  或设 FARVIEW_NO_TUNNEL=1 自行起隧道。中继仍在运行。'));
     } else {
       log(red('✗ cloudflared 启动失败：'), String(err));
     }

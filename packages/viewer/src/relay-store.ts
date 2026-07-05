@@ -7,7 +7,7 @@
  * 环形缓冲**（{@link CAP}），防长时间联调内存无限涨。
  */
 import { useSyncExternalStore } from 'react';
-import type { AgentInfo, IncomingMessage, NetMessage, SnapshotMessage } from '@farsight/protocol';
+import type { AgentInfo, IncomingMessage, NetMessage, SnapshotMessage } from '@farview/protocol';
 
 /** 各通道保留的最大条数（超出丢弃最旧的）。 */
 export const CAP = 5000;

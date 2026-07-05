@@ -1,7 +1,7 @@
 {
-  "name": "@farsight/agent",
+  "name": "@farview/agent",
   "version": "0.1.0",
-  "description": "Farsight 页面 agent —— console/network/error/event 劫持 + rrweb 画面镜像，?debug= 时懒加载、零业务依赖",
+  "description": "Farview 页面 agent —— console/network/error/event 劫持 + rrweb 画面镜像，?debug= 时懒加载、零业务依赖",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -21,10 +21,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@rrweb/record": "catalog:"
+    "@rrweb/record": "^2.1.0"
   },
   "devDependencies": {
-    "@farsight/protocol": "workspace:*",
+    "@farview/protocol": "workspace:*",
     "tsup": "catalog:",
     "typescript": "catalog:"
   }

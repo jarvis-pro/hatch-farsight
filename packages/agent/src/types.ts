@@ -1,7 +1,7 @@
 /**
  * 宿主项目的可选适配注入——agent 保持零业务依赖的关键。
  */
-export interface FarsightOptions {
+export interface FarviewOptions {
   /**
    * 业务码 → 可读名。响应 JSON `{code,message}` 时用于把「HTTP 200 但 code≠0」标红。
    * `code===0` 也会经过本函数（由宿主自行返回如「成功」）。

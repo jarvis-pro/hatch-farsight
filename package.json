@@ -1,5 +1,5 @@
 {
-  "name": "hatch-farsight",
+  "name": "hatch-farview",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -8,13 +8,13 @@
     "node": ">=20"
   },
   "bin": {
-    "farsight": "./packages/cli/bin.mjs"
+    "farview": "./packages/cli/bin.mjs"
   },
   "scripts": {
     "build": "pnpm -r run build",
     "typecheck": "pnpm run build && pnpm -r run typecheck",
     "start": "node packages/cli/bin.mjs",
-    "dev:viewer": "pnpm --filter @farsight/viewer dev",
+    "dev:viewer": "pnpm --filter @farview/viewer dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

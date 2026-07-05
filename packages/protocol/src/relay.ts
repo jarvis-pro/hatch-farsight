@@ -41,7 +41,7 @@ export interface ResetMessage {
 /**
  * relay 注入：自动建立的 Cloudflare 隧道地址（relay 启动时拉起隧道并解析得到）。viewer 据此
  * **自动回填**「生成调试链接」弹窗的隧道地址，无需手动粘贴子域名。viewer 连上即下发一次（隧道
- * 已就绪时）；隧道稍后才解析出地址则解析后广播给所有 viewer。未启用自动隧道（`FARSIGHT_NO_TUNNEL`）
+ * 已就绪时）；隧道稍后才解析出地址则解析后广播给所有 viewer。未启用自动隧道（`FARVIEW_NO_TUNNEL`）
  * 或地址尚未解析出时不发本条。
  */
 export interface TunnelMessage {

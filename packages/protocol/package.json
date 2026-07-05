@@ -1,7 +1,7 @@
 {
-  "name": "@farsight/protocol",
+  "name": "@farview/protocol",
   "version": "0.1.0",
-  "description": "Farsight 线协议 —— agent 与 viewer 共享的单一真相源（纯类型、零运行时）",
+  "description": "Farview 线协议 —— agent 与 viewer 共享的单一真相源（纯类型、零运行时）",
   "license": "MIT",
   "type": "module",
   "types": "./src/index.ts",
