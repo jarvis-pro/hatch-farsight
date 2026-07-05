@@ -49,6 +49,9 @@ export function startFarsight(token: string, opts?: FarsightOptions): void {
   if (state.installed || !token) return;
   state.installed = true;
   state.options = opts ?? {};
+  // 在装 console hook 前抓一份原生 warn：即便安装过程中途失败、
+  // 或异常正出在 console hook 上，诊断信息也不会被 agent 自己劫持 / 吞掉。
+  const warn = console.warn.bind(console);
   const host = token.includes('.') ? token : `${token}${TUNNEL_SUFFIX}`;
   try {
     installConsoleHook();
@@ -57,7 +60,8 @@ export function startFarsight(token: string, opts?: FarsightOptions): void {
     installEventHook();
     installBadge(ensureCode()); // 角落码徽标，对应 viewer 下拉里的本页签
     connect(host);
-  } catch {
-    /* agent 任何异常都不得影响宿主页面 */
+  } catch (err) {
+    // agent 任何异常都不得影响宿主页面，但要留一条警告，别让联调静默失灵。
+    warn('[farsight] agent 启动失败，已停用（不影响页面）：', err);
   }
 }
