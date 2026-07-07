@@ -1,0 +1,26 @@
+{
+  "name": "@farview/example",
+  "version": "0.1.0",
+  "description": "Farview 端到端联调示例（Vite + TS）——按需懒加载 agent 的最小接入范式。用 `npx @farview/cli example` 释放成可改脚手架。",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "index.html",
+    "tsconfig.json",
+    "src"
+  ],
+  "scripts": {
+    "dev": "vite --host --port 5188",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@farview/agent": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -132,9 +132,25 @@ importers:
 
   packages/cli:
     devDependencies:
+      '@farview/example':
+        specifier: workspace:*
+        version: link:../example
       '@farview/viewer':
         specifier: workspace:*
         version: link:../viewer
+
+  packages/example:
+    dependencies:
+      '@farview/agent':
+        specifier: workspace:*
+        version: link:../agent
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
+      vite:
+        specifier: 'catalog:'
+        version: 6.4.3(jiti@2.7.0)(lightningcss@1.32.0)
 
   packages/protocol:
     devDependencies:
