@@ -28,6 +28,8 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 
 const PORT = Number(process.env.PORT || 9229);
@@ -97,6 +99,46 @@ const paint = (c, s) => (useColor ? `${c}${s}\x1b[0m` : s);
 const ts = () => new Date().toISOString().slice(11, 19);
 /** @param {...unknown} a */
 const log = (...a) => console.log(dim(`[${ts()}]`), ...a);
+
+// ─────────────────────────── 子命令：example 脚手架 ───────────────────────────
+// 常驻工具惯例（cf. stripe samples create / prisma init）：把随包发布的内置模板
+// 释放成一个可直接改跑的独立 Vite + TS 项目，演示「?debug= 时才懒加载 agent」的
+// 最小接入。模板由 scripts/build-template.mjs 从 @farview/example 生成（见 files）。
+// 命中即释放并退出——绝不启动 relay。
+if (process.argv[2] === 'example') {
+  scaffoldExample(process.argv[3]);
+  process.exit(0);
+}
+
+/** @param {string | undefined} dirArg 目标目录名（缺省 farview-example） */
+function scaffoldExample(dirArg) {
+  const name = dirArg || 'farview-example';
+  const dest = path.resolve(process.cwd(), name);
+  const tpl = fileURLToPath(new URL('./template', import.meta.url));
+
+  if (!fs.existsSync(tpl)) {
+    log(red('✗ 未找到内置模板。'), '仓库内开发请先', cyan('pnpm --filter @farview/cli build'));
+    process.exit(1);
+  }
+  if (fs.existsSync(dest) && fs.readdirSync(dest).length > 0) {
+    log(red(`✗ 目录已存在且非空：${dest}`));
+    process.exit(1);
+  }
+
+  fs.cpSync(tpl, dest, { recursive: true });
+
+  log(green('✓ 已生成 Farview 示例项目：'), bold(name));
+  console.log(`
+  ${dim('下一步：')}
+    cd ${name}
+    npm install        ${dim('# 或 pnpm install')}
+    npm run dev        ${dim('# 起测试页 http://localhost:5188')}
+
+  ${dim('另开一终端起中继（自动带隧道），把打印的子域名拼进 URL：')}
+    npx @farview/cli
+    ${dim('浏览器打开')} http://localhost:5188/?debug=${cyan('<隧道子域名>')}
+`);
+}
 
 const server = http.createServer((req, res) => {
   const path = (req.url || '/').split('?')[0];

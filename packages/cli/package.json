@@ -1,6 +1,6 @@
 {
   "name": "@farview/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Farview 中继 CLI —— 本地零依赖 WS relay + 内嵌 viewer 单文件 + 自动 Cloudflare 隧道（发布于 @farview scope，bin 命令为 farview）",
   "license": "MIT",
   "type": "module",
@@ -9,15 +9,17 @@
   },
   "files": [
     "bin.mjs",
-    "viewer.html"
+    "viewer.html",
+    "template"
   ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "cp ../viewer/dist/index.html ./viewer.html"
+    "build": "cp ../viewer/dist/index.html ./viewer.html && node scripts/build-template.mjs"
   },
   "devDependencies": {
+    "@farview/example": "workspace:*",
     "@farview/viewer": "workspace:*"
   }
 }
