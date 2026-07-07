@@ -1,7 +1,12 @@
-# 构建产物 / 依赖 / 锁文件
-**/dist/
+# 依赖 / 锁文件
 node_modules/
 pnpm-lock.yaml
 
-# CLI 内嵌的 viewer 单文件构建产物（有意提交，非手写）
+# 构建产物
+**/dist/
+
+# 有意提交的生成产物（非手写，由构建脚本生成，勿格式化以免与源产生 diff）
+# - viewer 单文件（vite-plugin-singlefile）
 packages/cli/viewer.html
+# - example 脚手架模板（scripts/build-template.mjs 生成）
+packages/cli/template/
